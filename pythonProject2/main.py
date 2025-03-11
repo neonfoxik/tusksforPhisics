@@ -123,10 +123,8 @@ def update_file(call):
 def read_tasks(filename):
     try:
         file_path = os.path.join('Files', filename)
-        print(f"Пытаемся прочитать файл: {file_path}")  # добавьте для отладки
         with open(file_path, 'r', encoding='utf-8') as file:
             lines = file.readlines()
-            print(f"Прочитано строк: {len(lines)}")  # добавьте для отладки
             return lines
     except Exception as e:
         print(f"Ошибка в read_tasks: {e}")
@@ -148,7 +146,6 @@ def start(message):
 @bot.callback_query_handler(func=lambda call: call.data.startswith("tusk_"))
 def callback_query(call):
     try:
-        print(f"Получен callback с данными: {call.data}")  # добавьте для отладки
         if call.data == "tusk_easy":
             task = random.choice(read_tasks('easy.txt')).strip()
             bot.send_message(call.message.chat.id, f"Легкая задача:\n{task}")
