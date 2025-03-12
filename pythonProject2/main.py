@@ -20,10 +20,8 @@ def admin_permission(func):
     def wrapped(message: Message) -> None:
         try:
             user_id = message.from_user.id
-            if str(user_id) != OWNER_ID:
-                bot.send_message(user_id, '⛔ У вас нет администраторского доступа')
-                return
-            return func(message)
+            if str(user_id) == OWNER_ID:
+                return func(message)
         except Exception as e:
             print(f"Ошибка в admin_permission: {e}")
 
